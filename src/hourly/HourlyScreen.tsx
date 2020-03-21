@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native';
 
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -10,10 +11,11 @@ const styles = StyleSheet.create({
 })
 
 
-export function home() {
+export function hourly() {
     return (
         <View style={styles.container}>
-            <Text>Home Screen</Text>
+            <Text>Hourly forecast</Text>
         </View>
     );
 }
+

@@ -2,12 +2,10 @@ import React from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, Text } from 'react-native';
 
 import HomeScreen from './home';
 import HourlyScreen from './hourly';
 import WeeklyScreen from './weekly';
-
 
 const Tab = createBottomTabNavigator();
 

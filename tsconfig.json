@@ -1,13 +1,5 @@
 {
     "compilerOptions": {
-      "baseUrl": ".",
-      "paths": {
-        "*": ["types/*"],
-        "assets/*": ["src/assets/*"],
-        "components/*": ["src/components/*"],
-        "stores": ["src/stores"],
-        "utils/*": ["src/utils/*"],
-      },
       "allowJs": true,
       "allowSyntheticDefaultImports": true,
       "esModuleInterop": true,

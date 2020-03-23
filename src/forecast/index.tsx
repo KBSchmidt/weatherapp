@@ -1,5 +1,5 @@
 import React from 'react';
-import { hourly } from './HourlyScreen';
+import Hourly from './ForeCastScreen';
 
 import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
@@ -7,7 +7,7 @@ const Stack = createStackNavigator();
 function HourlyScreen() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Hourly" component={hourly} />
+            <Stack.Screen name="Hourly" component={Hourly} />
         </Stack.Navigator>
     );
 }

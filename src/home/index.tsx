@@ -1,7 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { home } from './HomeScreen'
+import Home from './HomeScreen'
 
 const Stack = createStackNavigator();
 
@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 function HomeScreen() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Home" component={home} />
+            <Stack.Screen name="Home" component={Home} />
         </Stack.Navigator>
     );
 }

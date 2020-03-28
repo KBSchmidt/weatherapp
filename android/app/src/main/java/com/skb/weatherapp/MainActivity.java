@@ -1,4 +1,4 @@
-package com.forecast;
+package com.skb.weatherapp;
 
 import com.facebook.react.ReactActivity;
 

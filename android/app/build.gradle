@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.forecast"
+        applicationId "com.skb.weatherapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

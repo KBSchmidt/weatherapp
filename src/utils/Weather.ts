@@ -32,9 +32,8 @@ export const getCurrentWeather = async (city: string) => {
 export const getForecast = async (city: string) => {
     try {
         const url = `${config.baseUrl}${config.hourly}${querystring.stringify({ APPID: config.APPID, q: city, lang: config.lang, units: config.units })}`
-        console.log(url)
         const res = await fetch(url)
-
+        console.log(url)
         if (res.ok) {
             return await res.json()
         }

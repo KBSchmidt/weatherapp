@@ -1,4 +1,4 @@
-package com.forecast;
+package com.skb.weatherapp;
 
 import android.app.Application;
 import android.content.Context;

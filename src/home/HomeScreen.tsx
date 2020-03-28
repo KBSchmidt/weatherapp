@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import { getIconUrl, getForecastByCoords, getCurrentWeatherByCoords } from '../utils/Weather';
-import { Tempreature } from '../types/tempreture';
+import { Tempreature } from '../../types/tempreture';
 import { getDays } from '../utils/forecastHelper';
 import { LocationContext } from '../components/LocationProvider'
+import { ThemeContext } from '../components/ThemeProvider'
+import { useNavigation } from '@react-navigation/native';
 
 
 const styles = StyleSheet.create({
@@ -33,7 +36,9 @@ const styles = StyleSheet.create({
 const HomeScreen: React.FC = () => {
     const [localWeather, setLocalWeather] = useState<CurrentWeatherResponse.RootObject>()
     const [hourlyForcast, setHourlyForcast] = useState<ForecastResponse.RootObject>()
-    const coords = React.useContext(LocationContext)
+    const navigation = useNavigation()
+    const coords = useContext(LocationContext)
+    const theme = useContext(ThemeContext)
 
     useEffect(() => {
         if (coords) {
@@ -66,14 +71,16 @@ const HomeScreen: React.FC = () => {
 
     console.log('getDays', getDays({ list }))
 
+    navigation.setOptions({ title: name })
+
     return (
-        <View style={styles.container}>
+        <LinearGradient colors={[theme.colors.gradientTop, theme.colors.gradientBottom]} style={styles.container}>
             <View style={styles.center}>
                 <Text style={styles.city}>{name}</Text>
                 <Text style={styles.temp}>{main?.temp} {Tempreature.celcius}</Text>
             </View>
             <Image source={{ uri: getIconUrl(report.icon) }} style={styles.icon} resizeMode='contain' />
-        </View>
+        </LinearGradient>
     );
 }
 

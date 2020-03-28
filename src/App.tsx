@@ -8,6 +8,7 @@ import { request, PERMISSIONS } from 'react-native-permissions';
 import HomeScreen from './home';
 import { Platform } from 'react-native';
 import LocationProvider from './components/LocationProvider';
+import ThemeProvider from './components/ThemeProvider';
 
 const MainStack = createStackNavigator()
 
@@ -31,13 +32,21 @@ const App: React.FC = () => {
 
     }, [])
     return (
-        <LocationProvider>
-            <NavigationContainer>
-                <MainStack.Navigator>
-                    <MainStack.Screen name="Home" component={HomeScreen} />
-                </MainStack.Navigator>
-            </NavigationContainer>
-        </LocationProvider>
+        <ThemeProvider>
+            <LocationProvider>
+                <NavigationContainer>
+                    <MainStack.Navigator>
+                        <MainStack.Screen
+                            name='Home'
+                            component={HomeScreen}
+                            options={{
+                                title: ""
+                            }}
+                        />
+                    </MainStack.Navigator>
+                </NavigationContainer>
+            </LocationProvider>
+        </ThemeProvider>
     );
 }
 

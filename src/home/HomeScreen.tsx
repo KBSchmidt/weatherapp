@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { getIconUrl, getForecastByCoords, getCurrentWeatherByCoords } from '../utils/Weather';
 import { Tempreature } from '../../types/tempreture';
 import { getDays, getMinMaxTempForDay, getMostCommonWeather, getMonthAndDay } from '../utils/forecastHelper';
-import { LocationContext } from '../components/LocationProvider'
+import { LocationContext } from '../components/LocationProvider/LocationProvider'
 import { theme } from '../components/ThemeProvider'
 import pin from '../assets/map-marker.png'
 
@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
 const renderItem: ListRenderItem<ForecastResponse.ListItem[]> = ({ item }) => {
     const [tempMin, tempMax] = getMinMaxTempForDay(item);
     const dailyWeather = getMostCommonWeather(item);
-    const date = new Date(item[0].dt*1000);
-    
+    const date = new Date(item[0].dt * 1000);
+
     return (
         <View style={styles.center}>
             <Text style={styles.forecastText}>{getMonthAndDay(date)}</Text>
@@ -76,14 +76,19 @@ const renderItem: ListRenderItem<ForecastResponse.ListItem[]> = ({ item }) => {
 const HomeScreen: React.FC = () => {
     const [localWeather, setLocalWeather] = useState<CurrentWeatherResponse.RootObject>()
     const [hourlyForcast, setHourlyForcast] = useState<ForecastResponse.RootObject>()
+    const [error, setError] = useState("")
     const navigation = useNavigation()
     const coords = useContext(LocationContext)
 
     useEffect(() => {
         if (coords) {
             (async function () {
-                const local = await getCurrentWeatherByCoords(coords?.latitude, coords?.longitude)
-                setLocalWeather(local)
+                try {
+                    const local = await getCurrentWeatherByCoords(coords?.latitude, coords?.longitude)
+                    setLocalWeather(local)
+                } catch (err) {
+                    setError(err.message)
+                }
             }())
         }
 
@@ -93,11 +98,24 @@ const HomeScreen: React.FC = () => {
     useEffect(() => {
         if (coords) {
             (async function () {
-                const forcast = await getForecastByCoords(coords?.latitude, coords?.longitude)
-                setHourlyForcast(forcast)
+                try {
+                    const forcast = await getForecastByCoords(coords?.latitude, coords?.longitude)
+                    setHourlyForcast(forcast)
+                } catch (err) {
+                    setError(err.message)
+                }
+
             }())
         }
     }, [coords])
+
+    if (error) {
+        return (
+        <LinearGradient colors={[theme.colors.gradientTop, theme.colors.gradientBottom]} style={[styles.flex, styles.center]}>
+            <Text style={styles.forecastText}>{error}</Text>
+        </LinearGradient>
+        )
+    }
 
 
     if (!localWeather || !hourlyForcast) return (

@@ -13,32 +13,23 @@ const config = {
 
 
 export const getCurrentWeatherByCoords = async (lat: number, lon: number) => {
-    try {
-        const url = `${config.baseUrl}${config.current}${querystring.stringify({ APPID: config.APPID, lat, lon, lang: config.lang, units: config.units })}`
-        const res = await fetch(url)
 
-        if (res.ok) {
-            return await res.json()
-        }
-        return await res.text()
+    const url = `${config.baseUrl}${config.current}${querystring.stringify({ APPID: config.APPID, lat, lon, lang: config.lang, units: config.units })}`
+    const res = await fetch(url)
 
-    } catch (error) {
-        return error
+    if (res.ok) {
+        return await res.json()
     }
+    throw await res.json()
 }
 
 export const getForecastByCoords = async (lat: number, lon: number) => {
-    try {
-        const url = `${config.baseUrl}${config.hourly}${querystring.stringify({ APPID: config.APPID, lat, lon, lang: config.lang, units: config.units })}`
-        const res = await fetch(url)
-        if (res.ok) {
-            return await res.json()
-        }
-        return await res.text()
-
-    } catch (error) {
-        return error
+    const url = `${config.baseUrl}${config.hourly}${querystring.stringify({ APPID: config.APPID, lat, lon, lang: config.lang, units: config.units })}`
+    const res = await fetch(url)
+    if (res.ok) {
+        return await res.json()
     }
+    throw await res.json()
 }
 
 export const getIconUrl = (icon: string) => {

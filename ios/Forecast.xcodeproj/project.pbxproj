@@ -17,6 +17,7 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* ForecastTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ForecastTests.m */; };
 		426FB6D29073A80CF5F8865C /* libPods-ForecastTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8626082199151D7E9DFF3788 /* libPods-ForecastTests.a */; };
+		626EDE5B243144400041119E /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 626EDE5A243144400041119E /* BootSplash.storyboard */; };
 		88484236F6E069A9CFBC2554 /* libPods-Forecast-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF227B26C6CE8ACEE0224AE /* libPods-Forecast-tvOSTests.a */; };
 		B7594FB999ED630AAC1BE03F /* libPods-Forecast-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 574D387246A1F5D9F198F0A6 /* libPods-Forecast-tvOS.a */; };
 		B854E00B53FFA3B360056BB0 /* libPods-Forecast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F65C5C7DE8183CCF6AD191 /* libPods-Forecast.a */; };
@@ -56,6 +57,7 @@
 		2D02E47B1E0B4A5D006451C7 /* Forecast-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Forecast-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* Forecast-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Forecast-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		574D387246A1F5D9F198F0A6 /* libPods-Forecast-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Forecast-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		626EDE5A243144400041119E /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = Forecast/BootSplash.storyboard; sourceTree = "<group>"; };
 		77F65C5C7DE8183CCF6AD191 /* libPods-Forecast.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Forecast.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8626082199151D7E9DFF3788 /* libPods-ForecastTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ForecastTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		87726881CD05AA014DB3246A /* Pods-ForecastTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ForecastTests.debug.xcconfig"; path = "Target Support Files/Pods-ForecastTests/Pods-ForecastTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				626EDE5A243144400041119E /* BootSplash.storyboard */,
 			);
 			name = Forecast;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				626EDE5B243144400041119E /* BootSplash.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);

@@ -102,7 +102,9 @@ const HomeScreen: React.FC = () => {
     }, [coords])
 
 
-    if (!localWeather || !hourlyForcast) return null
+    if (!localWeather || !hourlyForcast) return (
+        <LinearGradient colors={[theme.colors.gradientTop, theme.colors.gradientBottom]} style={styles.container} />
+    )
 
     const { name, main, weather } = localWeather
     navigation.setOptions({ title: name })

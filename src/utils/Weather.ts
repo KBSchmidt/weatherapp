@@ -12,44 +12,11 @@ const config = {
 }
 
 
-
-export const getCurrentWeatherByCity = async (city: string) => {
-    try {
-        const url = `${config.baseUrl}${config.current}${querystring.stringify({ APPID: config.APPID, q: city, lang: config.lang, units: config.units })}`
-        console.log(url)
-        const res = await fetch(url)
-
-        if (res.ok) {
-            return await res.json()
-        }
-        return await res.text()
-
-    } catch (error) {
-        return error
-    }
-}
-
 export const getCurrentWeatherByCoords = async (lat: number, lon: number) => {
     try {
         const url = `${config.baseUrl}${config.current}${querystring.stringify({ APPID: config.APPID, lat, lon, lang: config.lang, units: config.units })}`
-        console.log(url)
         const res = await fetch(url)
 
-        if (res.ok) {
-            return await res.json()
-        }
-        return await res.text()
-
-    } catch (error) {
-        return error
-    }
-}
-
-export const getForecastByCity = async (city: string) => {
-    try {
-        const url = `${config.baseUrl}${config.hourly}${querystring.stringify({ APPID: config.APPID, q: city, lang: config.lang, units: config.units })}`
-        const res = await fetch(url)
-        console.log(url)
         if (res.ok) {
             return await res.json()
         }
@@ -64,7 +31,6 @@ export const getForecastByCoords = async (lat: number, lon: number) => {
     try {
         const url = `${config.baseUrl}${config.hourly}${querystring.stringify({ APPID: config.APPID, lat, lon, lang: config.lang, units: config.units })}`
         const res = await fetch(url)
-        console.log(url)
         if (res.ok) {
             return await res.json()
         }

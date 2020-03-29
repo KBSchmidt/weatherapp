@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { request, PERMISSIONS } from 'react-native-permissions';
-
+import RNBootSplash from "react-native-bootsplash";
 
 import HomeScreen from './home';
 import LocationProvider from './components/LocationProvider';
@@ -29,16 +29,16 @@ const App: React.FC = () => {
                 });
             }
         });
-
+    RNBootSplash.hide({ duration: 250 });
     }, [])
     return (
         <ThemeProvider>
             <LocationProvider>
                 <NavigationContainer>
                     <MainStack.Navigator
-                    screenOptions={{
-                        headerShown: false,
-                    }}
+                        screenOptions={{
+                            headerShown: false,
+                        }}
                     >
                         <MainStack.Screen
                             name='Home'

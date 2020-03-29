@@ -6,8 +6,8 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings=0",
+    "test": "jest --passWithNoTests",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "type-check": "tsc --noEmit",
     "pod:i": "pod install --project-directory=ios/"
   },
@@ -62,10 +62,10 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm run type-check && npm test"
+      "pre-push": "npm run type-check"
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "npm run lint"
+    "src/**/*.{js,jsx,ts,tsx}": "npm run lint --max-warnings=0"
   }
 }

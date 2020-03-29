@@ -54,6 +54,9 @@ const styles = StyleSheet.create({
     pin: {
         width: theme.dimensions.iconM,
         height: theme.dimensions.iconM
+    },
+    padding: {
+        padding: theme.spacing.unit * 3
     }
 })
 
@@ -111,7 +114,7 @@ const HomeScreen: React.FC = () => {
 
     if (error) {
         return (
-        <LinearGradient colors={[theme.colors.gradientTop, theme.colors.gradientBottom]} style={[styles.flex, styles.center]}>
+        <LinearGradient colors={[theme.colors.gradientTop, theme.colors.gradientBottom]} style={[styles.flex, styles.center, styles.padding]}>
             <Text style={styles.forecastText}>{error}</Text>
         </LinearGradient>
         )

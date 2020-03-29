@@ -12,8 +12,7 @@ export const getDays = ({ list }: DaysInput): DaysArray => {
     let prevDay = new Date(list[0].dt_txt).getDate()
     let dayNumber = 0;
     return list.reduce((acc, measurment, i) => {
-        const currentDay = new Date(measurment.dt_txt).getDate()
-
+        const currentDay = new Date(measurment.dt*1000).getDate()
         if (currentDay === today) {
             prevDay = currentDay;
             return acc

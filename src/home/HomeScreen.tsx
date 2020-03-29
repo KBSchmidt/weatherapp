@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { View, Text, StyleSheet, Image, ListRenderItem, FlatList } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { getLocales } from 'react-native-localize';
 import { useNavigation } from '@react-navigation/native';
 import { getIconUrl, getForecastByCoords, getCurrentWeatherByCoords } from '../utils/Weather';
 import { Tempreature } from '../../types/tempreture';
@@ -61,12 +60,11 @@ const styles = StyleSheet.create({
 const renderItem: ListRenderItem<ForecastResponse.ListItem[]> = ({ item }) => {
     const [tempMin, tempMax] = getMinMaxTempForDay(item);
     const dailyWeather = getMostCommonWeather(item);
-    const date = new Date(item[0].dt_txt);
-    const dayName = date.toLocaleDateString(`${getLocales()[0].languageTag}`, { weekday: 'short' })
+    const date = new Date(item[0].dt*1000);
+    
     return (
         <View style={styles.center}>
             <Text style={styles.forecastText}>{getMonthAndDay(date)}</Text>
-            <Text style={styles.forecastText}>{dayName}</Text>
             <Image source={{ uri: getIconUrl(dailyWeather.icon) }} style={styles.icon} resizeMode='contain' />
             <Text style={styles.forecastText}>{tempMin}{Tempreature.degree}</Text>
             <Text style={styles.forecastText}>{tempMax}{Tempreature.degree}</Text>

@@ -1,5 +1,5 @@
 import querystring from 'query-string';
-import * as RNLocalize from 'react-native-localize';
+import { getCountry } from 'react-native-localize';
 import { baseUrl, apiUrl } from './Constants'
 
 const config = {
@@ -8,7 +8,7 @@ const config = {
     current: '/data/2.5/weather?',
     hourly: '/data/2.5/forecast?',
     units: 'metric',
-    lang: RNLocalize.getCountry().toLowerCase(),
+    lang: getCountry().toLowerCase(),
 }
 
 
@@ -57,7 +57,7 @@ export const getForecastByCity = async (city: string) => {
 
     } catch (error) {
         return error
-    } 
+    }
 }
 
 export const getForecastByCoords = async (lat: number, lon: number) => {
@@ -72,7 +72,7 @@ export const getForecastByCoords = async (lat: number, lon: number) => {
 
     } catch (error) {
         return error
-    } 
+    }
 }
 
 export const getIconUrl = (icon: string) => {

@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
 import 'react-native-gesture-handler';
+import React, { useEffect } from 'react';
+import { Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { request, PERMISSIONS } from 'react-native-permissions';
 
 
 import HomeScreen from './home';
-import { Platform } from 'react-native';
 import LocationProvider from './components/LocationProvider';
 import ThemeProvider from './components/ThemeProvider';
 
@@ -35,7 +35,11 @@ const App: React.FC = () => {
         <ThemeProvider>
             <LocationProvider>
                 <NavigationContainer>
-                    <MainStack.Navigator>
+                    <MainStack.Navigator
+                    screenOptions={{
+                        headerShown: false,
+                    }}
+                    >
                         <MainStack.Screen
                             name='Home'
                             component={HomeScreen}

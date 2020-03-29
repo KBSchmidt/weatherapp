@@ -32,7 +32,7 @@ declare module ForecastResponse {
         pod: string;
     }
 
-    export interface List {
+    export interface ListItem {
         dt: number;
         main: Main;
         weather: Weather[];
@@ -62,7 +62,7 @@ declare module ForecastResponse {
         cod: string;
         message: number;
         cnt: number;
-        list: List[];
+        list: ListItem[];
         city: City;
     }
 

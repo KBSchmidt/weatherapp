@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, ListRenderItem, FlatList } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { getLocales } from 'react-native-localize';
+import { useNavigation } from '@react-navigation/native';
 import { getIconUrl, getForecastByCoords, getCurrentWeatherByCoords } from '../utils/Weather';
 import { Tempreature } from '../../types/tempreture';
-import { getDays } from '../utils/forecastHelper';
+import { getDays, getMinMaxTempForDay, getMostCommonWeather, getMonthAndDay } from '../utils/forecastHelper';
 import { LocationContext } from '../components/LocationProvider'
-import { ThemeContext } from '../components/ThemeProvider'
-import { useNavigation } from '@react-navigation/native';
+import { theme } from '../components/ThemeProvider'
+import pin from '../assets/map-marker.png'
 
 
 const styles = StyleSheet.create({
@@ -18,19 +20,59 @@ const styles = StyleSheet.create({
     city: {
         fontSize: 24,
         fontWeight: '500',
+        color: theme.colors.primaryTextColor
     },
     temp: {
-        fontSize: 32
+        fontSize: 48,
+        fontWeight: '500',
+        color: theme.colors.primaryTextColor,
+        marginVertical: theme.spacing.unit
+    },
+    desc: {
+        fontSize: 16,
+        fontWeight: '500',
+        color: theme.colors.primaryTextColor
     },
     center: {
         justifyContent: 'center',
         alignItems: 'center'
     },
     icon: {
-        width: 64,
-        height: 64
+        width: theme.dimensions.iconXL,
+        height: theme.dimensions.iconXL
+    },
+    flex: {
+        flex: 1,
+    },
+    forecastText: {
+        fontSize: 16,
+        fontWeight: '700',
+        color: theme.colors.primaryTextColor
+    },
+    row: {
+        flexDirection: "row"
+    },
+    pin: {
+        width: theme.dimensions.iconM,
+        height: theme.dimensions.iconM
     }
 })
+
+const renderItem: ListRenderItem<ForecastResponse.ListItem[]> = ({ item }) => {
+    const [tempMin, tempMax] = getMinMaxTempForDay(item);
+    const dailyWeather = getMostCommonWeather(item);
+    const date = new Date(item[0].dt_txt);
+    const dayName = date.toLocaleDateString(`${getLocales()[0].languageTag}`, { weekday: 'short' })
+    return (
+        <View style={styles.center}>
+            <Text style={styles.forecastText}>{getMonthAndDay(date)}</Text>
+            <Text style={styles.forecastText}>{dayName}</Text>
+            <Image source={{ uri: getIconUrl(dailyWeather.icon) }} style={styles.icon} resizeMode='contain' />
+            <Text style={styles.forecastText}>{tempMin}{Tempreature.degree}</Text>
+            <Text style={styles.forecastText}>{tempMax}{Tempreature.degree}</Text>
+        </View>
+    )
+}
 
 
 const HomeScreen: React.FC = () => {
@@ -38,7 +80,6 @@ const HomeScreen: React.FC = () => {
     const [hourlyForcast, setHourlyForcast] = useState<ForecastResponse.RootObject>()
     const navigation = useNavigation()
     const coords = useContext(LocationContext)
-    const theme = useContext(ThemeContext)
 
     useEffect(() => {
         if (coords) {
@@ -64,22 +105,29 @@ const HomeScreen: React.FC = () => {
     if (!localWeather || !hourlyForcast) return null
 
     const { name, main, weather } = localWeather
-    const [report] = weather;
-
-    const { list } = hourlyForcast;
-
-
-    console.log('getDays', getDays({ list }))
-
     navigation.setOptions({ title: name })
+    const [report] = weather;
+    const { list } = hourlyForcast
+    const days = getDays({ list })
 
     return (
         <LinearGradient colors={[theme.colors.gradientTop, theme.colors.gradientBottom]} style={styles.container}>
-            <View style={styles.center}>
-                <Text style={styles.city}>{name}</Text>
+            <View style={[styles.center, styles.flex]}>
+                <View style={[styles.row, styles.center]}>
+                    <Image source={pin} style={styles.pin} resizeMode='contain' />
+                    <Text style={styles.city}>{name}</Text>
+                </View>
                 <Text style={styles.temp}>{main?.temp} {Tempreature.celcius}</Text>
+                <Text style={styles.desc}>{report.description}</Text>
+                <Image source={{ uri: getIconUrl(report.icon) }} style={styles.icon} resizeMode='cover' />
             </View>
-            <Image source={{ uri: getIconUrl(report.icon) }} style={styles.icon} resizeMode='contain' />
+            <FlatList
+                data={days}
+                renderItem={renderItem}
+                keyExtractor={item => `${item[0].dt}`}
+                horizontal
+                style={styles.flex}
+            />
         </LinearGradient>
     );
 }

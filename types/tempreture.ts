@@ -1,3 +1,4 @@
 export enum Tempreature {
-  celcius = 'C°'  
+  celcius = '°C',
+  degree = '°'  
 }

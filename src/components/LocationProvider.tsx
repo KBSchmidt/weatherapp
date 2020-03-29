@@ -9,7 +9,6 @@ const LocationProvider: React.FC = ({ children }) => {
     useEffect(() => {
         Geolocation.getCurrentPosition(
             (position) => {
-                console.log(position.coords);
                 setCoords(position.coords)
             },
             (error) => {
